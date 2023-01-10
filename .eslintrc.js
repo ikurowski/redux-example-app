@@ -4,11 +4,11 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'plugin:react/recommended',
-    'airbnb',
     'plugin:react-hooks/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:prettier/recommended',
+    'plugin:react/recommended',
+    'airbnb',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -38,5 +38,6 @@ module.exports = {
     'react/jsx-one-expression-per-line': 'off',
     'no-unused-vars': 'warn',
     'react/jsx-no-bind': 'warn',
+    'operator-linebreak': 'off',
   },
 };
