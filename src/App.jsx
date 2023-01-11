@@ -1,19 +1,13 @@
 import React from 'react';
-
+import Header from './components/Header';
+import Main from './components/Main';
 
 function App() {
   return (
-    <button
-      type="button"
-      onClick={() => {
-        store.dispatch({
-          type: 'COUNTER',
-        });
-        console.log(store.getState().counter);
-      }}
-    >
-      +1
-    </button>
+    <>
+      <Header />
+      <Main />
+    </>
   );
 }
 
