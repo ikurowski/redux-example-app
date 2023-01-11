@@ -39,5 +39,6 @@ module.exports = {
     'no-unused-vars': 'warn',
     'react/jsx-no-bind': 'warn',
     'operator-linebreak': 'off',
+    'no-param-reassign': 'off',
   },
 };
