@@ -1,15 +1,19 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Modal, TextField, Button, Box } from '@mui/material';
+import { login } from '../features/authSlice';
 
 // mui
-import { Modal, TextField, Button, Box } from '@mui/material';
 
-export default function LoginModal() {
-  function loginHandler() {
-    console.log('login');
-  }
+export default function LoginModal({ showModal, closeModal }) {
+  const dispatch = useDispatch();
+  const loginHandler = () => {
+    dispatch(login());
+    closeModal();
+  };
 
   return (
-    <Modal open>
+    <Modal open={showModal} onClose={closeModal}>
       <Box
         sx={{
           bgcolor: 'background.paper',
