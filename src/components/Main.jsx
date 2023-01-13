@@ -11,7 +11,9 @@ export default function Main() {
   return (
     <main>
       <Box
+        bgcolor="#eee"
         sx={{
+          minHeight: 'calc(100vh - 64px)',
           p: 4,
           display: 'flex',
           flexDirection: 'column',
