@@ -12,7 +12,7 @@ export default function Main() {
     <main>
       <Box
         sx={{
-          p: 8,
+          p: 4,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
