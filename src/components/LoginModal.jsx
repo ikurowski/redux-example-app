@@ -34,7 +34,8 @@ export default function LoginModal({ showModal, closeModal }) {
         <form>
           <TextField
             id="standard-basic"
-            label="Username"
+            label='Just press "Login"'
+            placeholder='Just press "Login"'
             fullWidth
             margin="normal"
           />
