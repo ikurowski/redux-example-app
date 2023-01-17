@@ -1,6 +1,7 @@
 /* eslint-disable object-curly-newline */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { replaceCart } from './cartSlice';
 
 export const statusEnum = {
   rejected: 0,
@@ -16,43 +17,42 @@ const initialState = {
 const API_URL =
   'https://meal-app-eee91-default-rtdb.europe-west1.firebasedatabase.app/orders-redux-app.json';
 
-export const putRequestStatus = createAsyncThunk(
-  'status/putRequestStatus',
+export const putRequest = createAsyncThunk(
+  'status/putRequest',
   async (cart) => {
     const response = await axios.put(API_URL, cart);
     return response.data;
   },
 );
 
-export const getRequestStatus = createAsyncThunk(
-  'status/getRequestStatus',
-  async () => {
-    const response = await axios.get(API_URL);
-    return response.data;
-  },
-);
+export const getRequest = createAsyncThunk('status/getRequest', async () => {
+  const response = await axios.get(API_URL);
+  return response.data;
+});
 
 const statusSlice = createSlice({
   name: 'status',
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(putRequestStatus.pending, (state) => {
+      .addCase(putRequest.pending, (state) => {
         state.putStatus = statusEnum.pending;
       })
-      .addCase(putRequestStatus.fulfilled, (state) => {
+      .addCase(putRequest.fulfilled, (state) => {
         state.putStatus = statusEnum.fulfilled;
       })
-      .addCase(putRequestStatus.rejected, (state) => {
+      .addCase(putRequest.rejected, (state) => {
         state.putStatus = statusEnum.rejected;
       })
-      .addCase(getRequestStatus.pending, (state) => {
+      .addCase(getRequest.pending, (state) => {
         state.getStatus = statusEnum.pending;
       })
-      .addCase(getRequestStatus.fulfilled, (state) => {
+      .addCase(getRequest.fulfilled, (state, action) => {
         state.getStatus = statusEnum.fulfilled;
+        replaceCart(action.payload);
+        console.log(action.payload);
       })
-      .addCase(getRequestStatus.rejected, (state) => {
+      .addCase(getRequest.rejected, (state) => {
         state.getStatus = statusEnum.rejected;
       });
   },

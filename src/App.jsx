@@ -6,7 +6,7 @@ import { Alert } from '@mui/material';
 import Header from './components/Header';
 import Main from './components/Main';
 import LoginModal from './components/LoginModal';
-import { putRequestStatus, statusEnum } from './features/statusSlice';
+import { putRequest, getRequest, statusEnum } from './features/statusSlice';
 
 let isInitial = true;
 
@@ -18,11 +18,15 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getRequest());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (isInitial) {
       isInitial = false;
       return;
     }
-    dispatch(putRequestStatus(cart));
+    dispatch(putRequest(cart));
   }, [cart, dispatch]);
 
   useEffect(() => {
