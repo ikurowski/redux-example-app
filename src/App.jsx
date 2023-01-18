@@ -7,8 +7,7 @@ import Header from './components/Header';
 import Main from './components/Main';
 import LoginModal from './components/LoginModal';
 import { putRequest, getRequest, statusEnum } from './features/statusSlice';
-
-let isInitial = true;
+import { replaceCart } from './features/cartSlice';
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -18,16 +17,23 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getRequest());
-  }, [dispatch]);
+    if (cart.changedByAddingToCart) {
+      const cartItems = { items: cart.items };
+      dispatch(putRequest(cartItems));
+    }
+  }, [cart, dispatch]);
 
   useEffect(() => {
-    if (isInitial) {
-      isInitial = false;
-      return;
-    }
-    dispatch(putRequest(cart));
-  }, [cart, dispatch]);
+    const dispatchGetRequest = async () => {
+      try {
+        const response = await dispatch(getRequest()).unwrap();
+        dispatch(replaceCart(response));
+      } catch (error) {
+        throw new Error(error);
+      }
+    };
+    dispatchGetRequest();
+  }, [dispatch]);
 
   useEffect(() => {
     setShowAlert(true);

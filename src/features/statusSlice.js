@@ -1,7 +1,6 @@
 /* eslint-disable object-curly-newline */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { replaceCart } from './cartSlice';
 
 export const statusEnum = {
   rejected: 0,
@@ -43,17 +42,6 @@ const statusSlice = createSlice({
       })
       .addCase(putRequest.rejected, (state) => {
         state.putStatus = statusEnum.rejected;
-      })
-      .addCase(getRequest.pending, (state) => {
-        state.getStatus = statusEnum.pending;
-      })
-      .addCase(getRequest.fulfilled, (state, action) => {
-        state.getStatus = statusEnum.fulfilled;
-        replaceCart(action.payload);
-        console.log(action.payload);
-      })
-      .addCase(getRequest.rejected, (state) => {
-        state.getStatus = statusEnum.rejected;
       });
   },
 });
