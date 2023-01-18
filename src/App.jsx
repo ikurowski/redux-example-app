@@ -83,7 +83,7 @@ function App() {
           }}
           severity="success"
         >
-          Cart data updated successfully!
+          Cart updated successfully!
         </Alert>
       );
       break;
